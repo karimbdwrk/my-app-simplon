@@ -33,8 +33,15 @@ const RickAndMorty = () => {
 				<p>Loading ...</p>
 			) : (
 				<div>
+					<div>
+						<button>Alive</button>
+						<button>Dead</button>
+						<button>Reset</button>
+					</div>
 					{data.results.map((character) => (
-						<p>{character.name}</p>
+						<p key={character.id}>
+							{character.name} - {character.status}
+						</p>
 					))}
 				</div>
 			)}
