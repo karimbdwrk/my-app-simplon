@@ -1,25 +1,19 @@
-import logo from './logo.svg';
-import './App.css';
+// import TitleH1 from "./components/TitleH1";
+// import TitleH2 from "./components/TitleH2";
+// import Counter from "./components/Counter";
+import List from "./components/List";
+
+import "./App.css";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+	return (
+		<div className='App'>
+			{/* <TitleH1 name='Karim' age={33} />
+			<TitleH2 content='Start editing react with me' />
+			<Counter name='Compteur #1' /> */}
+			<List />
+		</div>
+	);
 }
 
 export default App;
