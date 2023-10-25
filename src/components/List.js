@@ -112,23 +112,44 @@ const data = [
 
 const List = () => {
 	const [items, setItems] = useState(data);
+	const [displayedItems, setDisplayedItems] = useState(data);
 
-	const handleFilter = (color) => {
+	const handleColorFilter = (color) => {
 		const filteredItems = items.filter((item) => item.color === color);
-		setItems(filteredItems);
+		setDisplayedItems(filteredItems);
+	};
+
+	const handleTypeFilter = (type) => {
+		// Filtre fruits ou légumes
 	};
 
 	const handleReset = () => {
-		setItems(data);
+		setDisplayedItems(data);
 	};
 
 	return (
 		<div>
 			<TitleH1 name='Karim' age={33} />
-			<button onClick={() => handleFilter("Rouge")}>Rouge</button>
-			<button>Vert</button>
-			<button onClick={handleReset}>Reset</button>
-			{items.map((item) => (
+			<div>
+				<button
+					style={styles.button}
+					onClick={() => handleColorFilter("Rouge")}>
+					Rouge
+				</button>
+				<button
+					style={styles.button}
+					onClick={() => handleColorFilter("Vert")}>
+					Vert
+				</button>
+				<button style={styles.button} onClick={handleReset}>
+					Reset
+				</button>
+			</div>
+			<div>
+				<button></button>
+				<button></button>
+			</div>
+			{displayedItems.map((item) => (
 				<div style={styles.card}>
 					<p>
 						{item.name} - {item.type} - {item.color}
@@ -144,6 +165,9 @@ const styles = {
 		backgroundColor: "pink",
 		border: "1px solid #000",
 		color: "#101010",
+	},
+	button: {
+		margin: 5,
 	},
 };
 

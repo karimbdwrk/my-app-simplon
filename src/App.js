@@ -1,7 +1,8 @@
 // import TitleH1 from "./components/TitleH1";
 // import TitleH2 from "./components/TitleH2";
 // import Counter from "./components/Counter";
-import List from "./components/List";
+// import List from "./components/List";
+import RickAndMorty from "./components/RickAndMorty";
 
 import "./App.css";
 
@@ -11,7 +12,8 @@ function App() {
 			{/* <TitleH1 name='Karim' age={33} />
 			<TitleH2 content='Start editing react with me' />
 			<Counter name='Compteur #1' /> */}
-			<List />
+			{/* <List /> */}
+			<RickAndMorty />
 		</div>
 	);
 }
