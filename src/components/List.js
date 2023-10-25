@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 import TitleH1 from "./TitleH1";
 
@@ -111,10 +111,24 @@ const data = [
 ];
 
 const List = () => {
+	const [items, setItems] = useState(data);
+
+	const handleFilter = (color) => {
+		const filteredItems = items.filter((item) => item.color === color);
+		setItems(filteredItems);
+	};
+
+	const handleReset = () => {
+		setItems(data);
+	};
+
 	return (
 		<div>
 			<TitleH1 name='Karim' age={33} />
-			{data.map((item) => (
+			<button onClick={() => handleFilter("Rouge")}>Rouge</button>
+			<button>Vert</button>
+			<button onClick={handleReset}>Reset</button>
+			{items.map((item) => (
 				<div style={styles.card}>
 					<p>
 						{item.name} - {item.type} - {item.color}
