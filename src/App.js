@@ -1,20 +1,23 @@
-// import TitleH1 from "./components/TitleH1";
-// import TitleH2 from "./components/TitleH2";
-// import Counter from "./components/Counter";
-// import List from "./components/List";
-import RickAndMorty from "./components/RickAndMorty";
+import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+
+import Header from "./components/global/Header";
+import Footer from "./components/global/Footer";
+import HomePage from "./pages/HomePage";
+import AboutPage from "./pages/AboutPage";
 
 import "./App.css";
 
 function App() {
 	return (
-		<div className='App'>
-			{/* <TitleH1 name='Karim' age={33} />
-			<TitleH2 content='Start editing react with me' />
-			<Counter name='Compteur #1' /> */}
-			{/* <List /> */}
-			<RickAndMorty />
-		</div>
+		<Router>
+			<div className='App'>
+				<Routes>
+					<Route path='/' element={<HomePage />} />
+					<Route path='/about' element={<AboutPage />} />
+				</Routes>
+			</div>
+		</Router>
 	);
 }
 
