@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 
+import Image from "./Image";
+
 const RickAndMorty = () => {
 	const [data, setData] = useState([]);
 	const [filteredData, setFilteredData] = useState([]);
@@ -57,15 +59,16 @@ const RickAndMorty = () => {
 						</button>
 						<button onClick={handleReset}>Reset</button>
 					</div>
-					{filteredData.map((character) => (
-						<div style={styles.card} key={character.id}>
-							<img src={character.image} />
-							{/* <Image src={character.image} /> */}
-							<p>
-								{character.name} - {character.status}
-							</p>
-						</div>
-					))}
+					<div style={styles.container}>
+						{filteredData.map((character) => (
+							<div style={styles.card} key={character.id}>
+								<Image source={character.image} />
+								<p>
+									{character.name} - {character.status}
+								</p>
+							</div>
+						))}
+					</div>
 				</div>
 			)}
 		</div>
@@ -73,11 +76,21 @@ const RickAndMorty = () => {
 };
 
 const styles = {
+	container: {
+		display: "flex",
+		// flexDirection: "column",
+		justifyContent: "center",
+		alignItems: "center",
+		flexWrap: "wrap",
+		gap: 10,
+		marginTop: 30,
+	},
 	card: {
 		border: "1px solid #F7F7F7",
 		borderRadius: 5,
-		margin: 15,
+		// margin: 5,
 		padding: 15,
+		width: "25%",
 	},
 };
 
