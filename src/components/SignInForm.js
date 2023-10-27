@@ -10,13 +10,16 @@ const SignInForm = () => {
 		console.log("useEffect");
 		const sendData = async () => {
 			try {
-				const response = await fetch("#", {
-					method: "POST",
-					headers: {
-						"Content-Type": "application/json",
-					},
-					body: JSON.stringify(data),
-				});
+				const response = await fetch(
+					"http://localhost:3000/auth/signin",
+					{
+						method: "POST",
+						headers: {
+							"Content-Type": "application/json",
+						},
+						body: JSON.stringify(data),
+					}
+				);
 				const apiResponse = await response.json();
 				console.log("reponse de la requete post:", apiResponse);
 				localStorage.setItem("jwt", apiResponse.token);
