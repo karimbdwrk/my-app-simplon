@@ -1,11 +1,11 @@
 import React from "react";
-import SignInForm from "../components/SignInForm";
+import SignInForm2 from "../components/SignInForm2";
 
 const SignIn = () => {
 	return (
 		<div className='signin'>
 			<h1>SignIn</h1>
-			<SignInForm />
+			<SignInForm2 />
 		</div>
 	);
 };

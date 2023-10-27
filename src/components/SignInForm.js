@@ -19,6 +19,7 @@ const SignInForm = () => {
 				});
 				const apiResponse = await response.json();
 				console.log("reponse de la requete post:", apiResponse);
+				localStorage.setItem("jwt", apiResponse.token);
 			} catch (error) {
 				console.error(
 					"Erreur lors de l'envoi de la requête POST :",
