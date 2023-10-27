@@ -1,13 +1,51 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 const SignInForm = () => {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
+	const [data, setData] = useState({});
+	const [submitted, setSubmitted] = useState(false);
+
+	useEffect(() => {
+		const sendData = async () => {
+			try {
+				const response = await fetch("#", {
+					method: "POST",
+					headers: {
+						"Content-Type": "application/json",
+					},
+					body: JSON.stringify(data),
+				});
+				const apiResponse = await response.json();
+				console.log("reponse de la requete post:", apiResponse);
+			} catch (error) {
+				console.error(
+					"Erreur lors de l'envoi de la requête POST :",
+					error
+				);
+			}
+		};
+		sendData();
+	}, [data]);
+
+	const handleSubmit = (e) => {
+		e.preventDefault(); // Bloquer le rechargement de la page
+		console.log("submit ok");
+
+		const formData = {
+			email: email,
+			password: password,
+		};
+
+		setData(formData);
+
+		console.log("formData :", formData);
+	};
 
 	return (
 		<div className='signinform'>
 			<h3>SignInForm</h3>
-			<form>
+			<form onSubmit={handleSubmit}>
 				<div>
 					<label>Email</label>
 					<input
@@ -24,7 +62,7 @@ const SignInForm = () => {
 						onChange={(e) => setPassword(e.target.value)}
 					/>
 				</div>
-				<button>Me connecter</button>
+				<button type='submit'>Me connecter</button>
 			</form>
 		</div>
 	);
