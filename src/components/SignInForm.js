@@ -7,6 +7,7 @@ const SignInForm = () => {
 	const [submitted, setSubmitted] = useState(false);
 
 	useEffect(() => {
+		console.log("useEffect");
 		const sendData = async () => {
 			try {
 				const response = await fetch("#", {
@@ -25,7 +26,10 @@ const SignInForm = () => {
 				);
 			}
 		};
-		sendData();
+		if (submitted) {
+			sendData();
+			setTimeout(() => setSubmitted(false), 3000);
+		}
 	}, [data]);
 
 	const handleSubmit = (e) => {
@@ -38,6 +42,7 @@ const SignInForm = () => {
 		};
 
 		setData(formData);
+		setSubmitted(true);
 
 		console.log("formData :", formData);
 	};
