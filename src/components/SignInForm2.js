@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 
 const SignInForm2 = () => {
+	const [jwt, setJwt] = useState(localStorage.getItem("jwt") || "");
+
 	const formik = useFormik({
 		initialValues: {
 			email: "",
@@ -21,7 +23,7 @@ const SignInForm2 = () => {
 			console.log("Formulaire ok");
 			console.log(values);
 			// handler submit
-			handleAuthentication();
+			handleAuthentication(values);
 		},
 	});
 
@@ -31,11 +33,12 @@ const SignInForm2 = () => {
 				method: "POST",
 				headers: {
 					"Content-Type": "application/json",
+					Authorization: jwt,
 				},
 				body: JSON.stringify(values),
 			});
 
-			if (response.jwt) {
+			if (response) {
 				const { jwt } = await response.json();
 
 				localStorage.setItem("jwt", jwt);
