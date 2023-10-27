@@ -14,13 +14,40 @@ const SignInForm2 = () => {
 				.email("Adresse email non valide"),
 			password: Yup.string()
 				.required("Mot de passe requis")
-				.min(4, "Le mot de passe doit comporter au moins 4 caractères"),
+				.min(4, "Le mot de passe doit comporter au moins 4 caractères")
+				.max(15, "C'est trop long mon pote !"),
 		}),
 		onSubmit: (values) => {
 			console.log("Formulaire ok");
 			console.log(values);
+			// handler submit
+			handleAuthentication();
 		},
 	});
+
+	const handleAuthentication = async (values) => {
+		try {
+			const response = await fetch("http://localhost:3000/auth/signin", {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify(values),
+			});
+
+			if (response.jwt) {
+				const { jwt } = await response.json();
+
+				localStorage.setItem("jwt", jwt);
+				console.log(
+					"Authentification réussie. Token stocké dans localStorage:",
+					jwt
+				);
+			}
+		} catch (error) {
+			console.error("Erreur lors de l'authentification :", error);
+		}
+	};
 
 	return (
 		<div>
@@ -35,6 +62,9 @@ const SignInForm2 = () => {
 						onBlur={formik.handleBlur}
 						value={formik.values.email}
 					/>
+					{formik.touched.email && formik.errors.email ? (
+						<div style={styles.red}>{formik.errors.email}</div>
+					) : null}
 				</div>
 				<div>
 					<label>Mot de passe</label>
@@ -45,11 +75,20 @@ const SignInForm2 = () => {
 						onBlur={formik.handleBlur}
 						value={formik.values.password}
 					/>
+					{formik.touched.password && formik.errors.password ? (
+						<div style={styles.red}>{formik.errors.password}</div>
+					) : null}
 				</div>
 				<button type='submit'>Me connecter</button>
 			</form>
 		</div>
 	);
+};
+
+const styles = {
+	red: {
+		color: "red",
+	},
 };
 
 export default SignInForm2;
